@@ -1,0 +1,1406 @@
+$ bbash    ash
+(base) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1/local[00m$ [Creverse-i-search)`': [Kc': conda activate multi_spkr[1@o[C[C[C(base) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1/local[00m$ conda activate multi_spkr
+(multi_spkr) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1/local[00m$ conda activate multi_spkrexit[Ksh run_nlv.sh telugu male1 [5Prm -r exp_telugu_male1
+rm: cannot remove 'exp_telugu_male1': No such file or directory
+(multi_spkr) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1/local[00m$ cd ..
+(multi_spkr) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1[00m$ cd ..rm -r exp_telugu_male1
+(multi_spkr) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1[00m$ rm -r exp_telugu_male1cd ..[Krm -r exp_telugu_male1conda activate multi_spkrexit[Ksh run_nlv.sh telugu male1 
+run_nlv.sh: 18: ./cmd.sh: [[: not found
+============================================================================
+                Data & Lexicon & Language Preparation                     
+============================================================================
+mkdir: cannot create directory 'tmp': File exists
+wav-to-duration --read-entire-file=true scp:exp_telugu_male1/data/train/wav.scp ark,t:exp_telugu_male1/data/train/dur.ark 
+LOG (wav-to-duration[5.5.1014~1-6e633]:main():wav-to-duration.cc:92) Printed duration for 3317 audio files.
+LOG (wav-to-duration[5.5.1014~1-6e633]:main():wav-to-duration.cc:94) Mean duration was 9.08678, min and max durations were 2.69869, 14.8907
+Data preparation succeeded
+LOGFILE:/dev/null
+$bin/ngt -i="$inpfile" -n=$order -gooout=y -o="$gzip -c > $tmpdir/ngram.${sdict}.gz" -fd="$tmpdir/$sdict" $dictionary $additional_parameters >> $logfile 2>&1
+$bin/ngt -i="$inpfile" -n=$order -gooout=y -o="$gzip -c > $tmpdir/ngram.${sdict}.gz" -fd="$tmpdir/$sdict" $dictionary $additional_parameters >> $logfile 2>&1
+$scr/build-sublm.pl $verbose $prune $prune_thr_str $smoothing "$additional_smoothing_parameters" --size $order --ngrams "$gunzip -c $tmpdir/ngram.${sdict}.gz" -sublm $tmpdir/lm.$sdict $additional_parameters >> $logfile 2>&1
+inpfile: exp_telugu_male1/data/lm_tmp/lm_phone_bg.ilm.gz
+outfile: /dev/stdout
+loading up to the LM level 1000 (if any)
+dub: 10000000
+OOV code is 21924
+OOV code is 21924
+Saving in txt format to /dev/stdout
+Dictionary & language model preparation succeeded
+utils/prepare_lang.sh --sil-prob 0.5 --position-dependent-phones false --num-sil-states 3 exp_telugu_male1/data/dict sil exp_telugu_male1/data/lang_tmp exp_telugu_male1/data/lang
+Checking exp_telugu_male1/data/dict/silence_phones.txt ...
+--> reading exp_telugu_male1/data/dict/silence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/silence_phones.txt is OK
+
+Checking exp_telugu_male1/data/dict/optional_silence.txt ...
+--> reading exp_telugu_male1/data/dict/optional_silence.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/optional_silence.txt is OK
+
+Checking exp_telugu_male1/data/dict/nonsilence_phones.txt ...
+--> reading exp_telugu_male1/data/dict/nonsilence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/nonsilence_phones.txt is OK
+
+Checking disjoint: silence_phones.txt, nonsilence_phones.txt
+--> disjoint property is OK.
+
+Checking exp_telugu_male1/data/dict/lexicon.txt
+--> reading exp_telugu_male1/data/dict/lexicon.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/lexicon.txt is OK
+
+Checking exp_telugu_male1/data/dict/extra_questions.txt ...
+--> reading exp_telugu_male1/data/dict/extra_questions.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/extra_questions.txt is OK
+--> SUCCESS [validating dictionary directory exp_telugu_male1/data/dict]
+
+**Creating exp_telugu_male1/data/dict/lexiconp.txt from exp_telugu_male1/data/dict/lexicon.txt
+fstaddselfloops exp_telugu_male1/data/lang/phones/wdisambig_phones.int exp_telugu_male1/data/lang/phones/wdisambig_words.int 
+prepare_lang.sh: validating output directory
+utils/validate_lang.pl exp_telugu_male1/data/lang
+Checking existence of separator file
+separator file exp_telugu_male1/data/lang/subword_separator.txt is empty or does not exist, deal in word case.
+Checking exp_telugu_male1/data/lang/phones.txt ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/lang/phones.txt is OK
+
+Checking words.txt: #0 ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/lang/words.txt is OK
+
+Checking disjoint: silence.txt, nonsilence.txt, disambig.txt ...
+--> silence.txt and nonsilence.txt are disjoint
+--> silence.txt and disambig.txt are disjoint
+--> disambig.txt and nonsilence.txt are disjoint
+--> disjoint property is OK
+
+Checking sumation: silence.txt, nonsilence.txt, disambig.txt ...
+--> found no unexplainable phones in phones.txt
+
+Checking exp_telugu_male1/data/lang/phones/context_indep.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang/phones/context_indep.txt
+--> exp_telugu_male1/data/lang/phones/context_indep.int corresponds to exp_telugu_male1/data/lang/phones/context_indep.txt
+--> exp_telugu_male1/data/lang/phones/context_indep.csl corresponds to exp_telugu_male1/data/lang/phones/context_indep.txt
+--> exp_telugu_male1/data/lang/phones/context_indep.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/nonsilence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 72 entry/entries in exp_telugu_male1/data/lang/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang/phones/nonsilence.int corresponds to exp_telugu_male1/data/lang/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang/phones/nonsilence.csl corresponds to exp_telugu_male1/data/lang/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang/phones/nonsilence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang/phones/silence.txt
+--> exp_telugu_male1/data/lang/phones/silence.int corresponds to exp_telugu_male1/data/lang/phones/silence.txt
+--> exp_telugu_male1/data/lang/phones/silence.csl corresponds to exp_telugu_male1/data/lang/phones/silence.txt
+--> exp_telugu_male1/data/lang/phones/silence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/optional_silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang/phones/optional_silence.int corresponds to exp_telugu_male1/data/lang/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang/phones/optional_silence.csl corresponds to exp_telugu_male1/data/lang/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang/phones/optional_silence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/disambig.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 4 entry/entries in exp_telugu_male1/data/lang/phones/disambig.txt
+--> exp_telugu_male1/data/lang/phones/disambig.int corresponds to exp_telugu_male1/data/lang/phones/disambig.txt
+--> exp_telugu_male1/data/lang/phones/disambig.csl corresponds to exp_telugu_male1/data/lang/phones/disambig.txt
+--> exp_telugu_male1/data/lang/phones/disambig.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/roots.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 73 entry/entries in exp_telugu_male1/data/lang/phones/roots.txt
+--> exp_telugu_male1/data/lang/phones/roots.int corresponds to exp_telugu_male1/data/lang/phones/roots.txt
+--> exp_telugu_male1/data/lang/phones/roots.{txt, int} are OK
+
+Checking exp_telugu_male1/data/lang/phones/sets.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 73 entry/entries in exp_telugu_male1/data/lang/phones/sets.txt
+--> exp_telugu_male1/data/lang/phones/sets.int corresponds to exp_telugu_male1/data/lang/phones/sets.txt
+--> exp_telugu_male1/data/lang/phones/sets.{txt, int} are OK
+
+Checking exp_telugu_male1/data/lang/phones/extra_questions.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 2 entry/entries in exp_telugu_male1/data/lang/phones/extra_questions.txt
+--> exp_telugu_male1/data/lang/phones/extra_questions.int corresponds to exp_telugu_male1/data/lang/phones/extra_questions.txt
+--> exp_telugu_male1/data/lang/phones/extra_questions.{txt, int} are OK
+
+Checking optional_silence.txt ...
+--> reading exp_telugu_male1/data/lang/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang/phones/optional_silence.txt is OK
+
+Checking disambiguation symbols: #0 and #1
+--> exp_telugu_male1/data/lang/phones/disambig.txt has "#0" and "#1"
+--> exp_telugu_male1/data/lang/phones/disambig.txt is OK
+
+Checking topo ...
+
+Checking word-level disambiguation symbols...
+--> exp_telugu_male1/data/lang/phones/wdisambig.txt exists (newer prepare_lang.sh)
+Checking exp_telugu_male1/data/lang/oov.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang/oov.txt
+--> exp_telugu_male1/data/lang/oov.int corresponds to exp_telugu_male1/data/lang/oov.txt
+--> exp_telugu_male1/data/lang/oov.{txt, int} are OK
+
+--> exp_telugu_male1/data/lang/L.fst is olabel sorted
+--> exp_telugu_male1/data/lang/L_disambig.fst is olabel sorted
+--> SUCCESS [validating lang directory exp_telugu_male1/data/lang]
+Preparing train, dev and test data
+Preparing language models for test
+arpa2fst --disambig-symbol=#0 --read-symbol-table=exp_telugu_male1/data/lang_test_bg/words.txt - exp_telugu_male1/data/lang_test_bg/G.fst 
+LOG (arpa2fst[5.5.1014~1-6e633]:Read():arpa-file-parser.cc:94) Reading \data\ section.
+LOG (arpa2fst[5.5.1014~1-6e633]:Read():arpa-file-parser.cc:149) Reading \1-grams: section.
+LOG (arpa2fst[5.5.1014~1-6e633]:Read():arpa-file-parser.cc:149) Reading \2-grams: section.
+WARNING (arpa2fst[5.5.1014~1-6e633]:ConsumeNGram():arpa-lm-compiler.cc:313) line 21934 [-3.22023	<s> <s>] skipped: n-gram has invalid BOS/EOS placement
+LOG (arpa2fst[5.5.1014~1-6e633]:RemoveRedundantStates():arpa-lm-compiler.cc:359) Reduced num-states from 21924 to 21924
+fstisstochastic exp_telugu_male1/data/lang_test_bg/G.fst 
+0.23525 -0.0544431
+utils/validate_lang.pl exp_telugu_male1/data/lang_test_bg
+Checking existence of separator file
+separator file exp_telugu_male1/data/lang_test_bg/subword_separator.txt is empty or does not exist, deal in word case.
+Checking exp_telugu_male1/data/lang_test_bg/phones.txt ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/lang_test_bg/phones.txt is OK
+
+Checking words.txt: #0 ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/lang_test_bg/words.txt is OK
+
+Checking disjoint: silence.txt, nonsilence.txt, disambig.txt ...
+--> silence.txt and nonsilence.txt are disjoint
+--> silence.txt and disambig.txt are disjoint
+--> disambig.txt and nonsilence.txt are disjoint
+--> disjoint property is OK
+
+Checking sumation: silence.txt, nonsilence.txt, disambig.txt ...
+--> found no unexplainable phones in phones.txt
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/context_indep.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/context_indep.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/context_indep.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/context_indep.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/context_indep.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/context_indep.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/context_indep.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/nonsilence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 72 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/nonsilence.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/nonsilence.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/nonsilence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/silence.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/silence.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/silence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/optional_silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/optional_silence.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/optional_silence.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/optional_silence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/disambig.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 4 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/disambig.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/disambig.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/disambig.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/roots.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 73 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/roots.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/roots.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/roots.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/roots.{txt, int} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/sets.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 73 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/sets.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/sets.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/sets.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/sets.{txt, int} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/extra_questions.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 2 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/extra_questions.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/extra_questions.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/extra_questions.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/extra_questions.{txt, int} are OK
+
+Checking optional_silence.txt ...
+--> reading exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt is OK
+
+Checking disambiguation symbols: #0 and #1
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.txt has "#0" and "#1"
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.txt is OK
+
+Checking topo ...
+
+Checking word-level disambiguation symbols...
+--> exp_telugu_male1/data/lang_test_bg/phones/wdisambig.txt exists (newer prepare_lang.sh)
+Checking exp_telugu_male1/data/lang_test_bg/oov.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang_test_bg/oov.txt
+--> exp_telugu_male1/data/lang_test_bg/oov.int corresponds to exp_telugu_male1/data/lang_test_bg/oov.txt
+--> exp_telugu_male1/data/lang_test_bg/oov.{txt, int} are OK
+
+--> exp_telugu_male1/data/lang_test_bg/L.fst is olabel sorted
+--> exp_telugu_male1/data/lang_test_bg/L_disambig.fst is olabel sorted
+--> exp_telugu_male1/data/lang_test_bg/G.fst is ilabel sorted
+--> exp_telugu_male1/data/lang_test_bg/G.fst has 21924 states
+fstdeterminizestar exp_telugu_male1/data/lang_test_bg/G.fst /dev/null 
+--> exp_telugu_male1/data/lang_test_bg/G.fst is determinizable
+--> utils/lang/check_g_properties.pl successfully validated exp_telugu_male1/data/lang_test_bg/G.fst
+--> utils/lang/check_g_properties.pl succeeded.
+--> Testing determinizability of L_disambig . G
+fsttablecompose exp_telugu_male1/data/lang_test_bg/L_disambig.fst exp_telugu_male1/data/lang_test_bg/G.fst 
+fstdeterminizestar 
+--> L_disambig . G is determinizable
+--> SUCCESS [validating lang directory exp_telugu_male1/data/lang_test_bg]
+Succeeded in formatting data.
+============================================================================
+                    Extract Pitch Features                                
+============================================================================
+============================================================================
+                    Extract FBANK Features                                
+============================================================================
+Extracting Pitch Fbank features
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(1)<module>()
+-> import os
+(Pdb) l
+  1  ->	import os
+  2  	os.environ["OMP_NUM_THREADS"] = "1" # export OMP_NUM_THREADS=1
+  3  	os.environ["OPENBLAS_NUM_THREADS"] = "1" # export OPENBLAS_NUM_THREADS=1
+  4  	os.environ["MKL_NUM_THREADS"] = "1" # export MKL_NUM_THREADS=1
+  5  	os.environ["VECLIB_MAXIMUM_THREADS"] = "1" # export VECLIB_MAXIMUM_THREADS=1
+  6  	os.environ["NUMEXPR_NUM_THREADS"] = "1" # export NUMEXPR_NUM_THREADS=1
+  7  	
+  8  	import sys
+  9  	from scipy.io import wavfile
+ 10  	from amfm_decompy import pYAAPT, basic_tools
+ 11  	import numpy as np
+(Pdb) bb    81
+Breakpoint 1 at /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py:81
+(Pdb) cc
+*** NameError: name 'cc' is not defined
+(Pdb) c
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(81)<module>()
+-> wav1 = np.pad(wav, 200)
+(Pdb) l
+ 76  	    utt_file=utt.split('\t')[1]
+ 77  	    fs, wav = wavfile.read(utt_file)
+ 78  	    wav = wav/(2**15)
+ 79  	    wav = kaldi_pad(wav,80)
+ 80  	    wav_out(utt_id, wav.reshape(-1,80))
+ 81 B->	    wav1 = np.pad(wav, 200)
+ 82  	    signal = basic_tools.SignalObj(data=wav1, fs=fs)
+ 83  	    #pitch=pYAAPT.yaapt(signal, **{'f0_min' : f0_min, 'f0_max': f0_max, 'frame_length': 25, 'frame_space':5})
+ 84  	    #f0 = pitch.samp_values
+ 85  	    f0, bap = analysis(utt_file, frame_length, frame_step)
+ 86  	    bap_out(utt_id, np.expand_dims(bap[:len(f0)], axis=-1))
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(82)<module>()
+-> signal = basic_tools.SignalObj(data=wav1, fs=fs)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(85)<module>()
+-> f0, bap = analysis(utt_file, frame_length, frame_step)
+(Pdb) s
+--Call--
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(19)analysis()
+-> def analysis(utt_file, frame_length=400, frame_step=80, fft_length=1024):
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(20)analysis()
+-> comm = "%s %s %s.f0.double %s.sp.double %s.bap.double > %s.log"%(ana_comm, utt_file, outstem, outstem, outstem, outstem)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(21)analysis()
+-> success = os.system(comm)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(22)analysis()
+-> comm = "%s +da %s.f0.double > %s.txt"%(x2x_comm, outstem, outstem)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(23)analysis()
+-> success = os.system(comm)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(24)analysis()
+-> fo = np.loadtxt(outstem+".txt")
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(25)analysis()
+-> comm = "%s +da tmp.bap.double > tmp.bap"%(x2x_comm)
+(Pdb) fo.shap
+*** AttributeError: 'numpy.ndarray' object has no attribute 'shap'
+(Pdb) fo.shapw e
+(2868,)
+(Pdb) l
+ 20  	    comm = "%s %s %s.f0.double %s.sp.double %s.bap.double > %s.log"%(ana_comm, utt_file, outstem, outstem, outstem, outstem)
+ 21  	    success = os.system(comm)
+ 22  	    comm = "%s +da %s.f0.double > %s.txt"%(x2x_comm, outstem, outstem)
+ 23  	    success = os.system(comm)
+ 24  	    fo = np.loadtxt(outstem+".txt")
+ 25  ->	    comm = "%s +da tmp.bap.double > tmp.bap"%(x2x_comm)
+ 26  	    success = os.system(comm)
+ 27  	    log_bap = np.loadtxt("tmp.bap")
+ 28  	    bap = np.exp(log_bap)
+ 29  	    return fo, bap
+ 30  	
+(Pdb) fo
+array([0., 0., 0., ..., 0., 0., 0.])
+(Pdb) fo[1000:1100]
+array([ 99.7028,  97.1573,  94.2171,  96.8512, 100.486 ,  99.4945,
+        98.0807,  97.7481,  97.4268,  98.191 ,  99.5514,  98.7371,
+        98.0893,  97.7589,  96.1381,  94.0542,  90.6566,  87.2104,
+        85.5755,  79.7761,  77.1834,  76.1524,   0.    ,   0.    ,
+         0.    ,   0.    ,   0.    ,   0.    ,   0.    ,   0.    ,
+        97.1505, 105.433 , 101.047 , 109.598 , 114.048 , 111.452 ,
+       109.778 , 115.26  , 128.2   , 107.972 , 106.076 , 104.566 ,
+       101.221 , 101.498 , 101.346 , 100.912 , 100.85  , 101.194 ,
+       101.894 , 102.841 , 104.6   , 106.376 , 109.059 , 112.431 ,
+       116.716 , 120.209 , 122.897 , 125.93  , 127.801 , 129.566 ,
+       131.165 , 139.726 , 147.448 , 150.685 , 152.755 , 155.267 ,
+       158.251 , 161.768 , 167.285 , 169.769 , 172.45  , 175.609 ,
+       181.055 , 186.26  , 185.202 , 190.88  , 189.991 , 187.729 ,
+       187.194 , 188.613 , 230.801 ,   0.    ,   0.    ,   0.    ,
+         0.    ,   0.    ,   0.    ,   0.    ,   0.    ,   0.    ,
+         0.    ,   0.    ,   0.    ,   0.    ,   0.    ,   0.    ,
+         0.    ,   0.    ,   0.    ,   0.    ])
+(Pdb) l
+ 31  	def generate_exc(fo, bap, wavlen):
+ 32  	    sawtooth = synthesise_excitation(fo, wavlen)
+ 33  	    bap = np.repeat(bap, 80, axis=0)
+ 34  	    bap = bap[:len(sawtooth)]
+ 35  	    new_exct = np.divide(sawtooth/2**15 + np.multiply((np.random.rand(len(sawtooth)))/2, bap) , 1.0+bap)
+ 36  	    return new_exct
+ 37  	
+ 38  	
+ 39  	
+ 40  	lang = sys.argv[1]
+ 41  	gender=sys.argv[2]
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(26)analysis()
+-> success = os.system(comm)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(27)analysis()
+-> log_bap = np.loadtxt("tmp.bap")
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(28)analysis()
+-> bap = np.exp(log_bap)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(29)analysis()
+-> return fo, bap
+(Pdb) bap, .shape
+(2868,)
+(Pdb) n
+--Return--
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(29)analysis()->(array([0., 0...., 0., 0., 0.]), array([1., 1...., 1., 1., 1.]))
+-> return fo, bap
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(86)<module>()
+-> bap_out(utt_id, np.expand_dims(bap[:len(f0)], axis=-1))
+(Pdb) l
+ 81 B	    wav1 = np.pad(wav, 200)
+ 82  	    signal = basic_tools.SignalObj(data=wav1, fs=fs)
+ 83  	    #pitch=pYAAPT.yaapt(signal, **{'f0_min' : f0_min, 'f0_max': f0_max, 'frame_length': 25, 'frame_space':5})
+ 84  	    #f0 = pitch.samp_values
+ 85  	    f0, bap = analysis(utt_file, frame_length, frame_step)
+ 86  ->	    bap_out(utt_id, np.expand_dims(bap[:len(f0)], axis=-1))
+ 87  	    f0[f0<1]=1
+ 88  	    fout(utt_id, np.expand_dims(f0, axis=-1))
+ 89  	    f0s_all.append(f0)
+ 90  	
+ 91  	    wav = load_wav(utt_file)    #fs, wav = wavfile.read(utt_file)
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(87)<module>()
+-> f0[f0<1]=1
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(88)<module>()
+-> fout(utt_id, np.expand_dims(f0, axis=-1))
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(89)<module>()
+-> f0s_all.append(f0)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(91)<module>()
+-> wav = load_wav(utt_file)    #fs, wav = wavfile.read(utt_file)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(92)<module>()
+-> wav = kaldi_pad(wav,frame_step)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(94)<module>()
+-> specgram = spectrogram(wav).astype(np.float32)
+(Pdb) 
+/raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py:94: ComplexWarning: Casting complex values to real discards the imaginary part
+  specgram = spectrogram(wav).astype(np.float32)
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(96)<module>()
+-> mag_spec = tf.math.abs(specgram[:-1,:]).numpy()
+(Pdb) l
+ 91  	    wav = load_wav(utt_file)    #fs, wav = wavfile.read(utt_file)
+ 92  	    wav = kaldi_pad(wav,frame_step)
+ 93  	
+ 94  	    specgram = spectrogram(wav).astype(np.float32)
+ 95  	
+ 96  ->	    mag_spec = tf.math.abs(specgram[:-1,:]).numpy()
+ 97  	    fbank = melspectrogram(mag_spec).astype(np.float32)
+ 98  	
+ 99  	    spec = norm_spec(mag_spec)
+100  	
+101  	    spec_out(utt_id, spec)
+(Pdb) s[ec   pev cgram.shape
+(2868, 513)
+(Pdb) specgram.shape     dtyep  pe
+dtype('float32')
+(Pdb) ([3@arg: 1) ([3PPdb) specgram = spectrogram(wav)
+(Pdb) specgram = spectrogram(wav)(Pdb) specgram.dtype[K
+dtype('complex128')
+(Pdb) specgram = spectrogram(wav)                           mag_spec = tf.math.abs(specgram)
+*** NameError: name 'tf' is not defined
+(Pdb) import tensorflow as tf
+2022-12-06 00:04:03.779077: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+(Pdb) import tensorflow as tf(Pdb) mag_spec = tf.math.abs(specgram)
+2022-12-06 00:04:08.375442: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-12-06 00:04:08.376735: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-12-06 00:04:08.577248: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:34:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.578331: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 1 with properties: 
+pciBusID: 0000:36:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.579346: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 2 with properties: 
+pciBusID: 0000:39:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.580311: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 3 with properties: 
+pciBusID: 0000:3b:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.581282: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 4 with properties: 
+pciBusID: 0000:57:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.582247: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 5 with properties: 
+pciBusID: 0000:59:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.583203: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 6 with properties: 
+pciBusID: 0000:5c:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.584158: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 7 with properties: 
+pciBusID: 0000:5e:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.585117: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 8 with properties: 
+pciBusID: 0000:b7:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.586068: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 9 with properties: 
+pciBusID: 0000:b9:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.587021: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 10 with properties: 
+pciBusID: 0000:bc:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.588020: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 11 with properties: 
+pciBusID: 0000:be:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.589025: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 12 with properties: 
+pciBusID: 0000:e0:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.589982: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 13 with properties: 
+pciBusID: 0000:e2:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.590945: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 14 with properties: 
+pciBusID: 0000:e5:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.591907: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 15 with properties: 
+pciBusID: 0000:e7:00.0 name: Tesla V100-SXM3-32GB computeCapability: 7.0
+coreClock: 1.597GHz coreCount: 80 deviceMemorySize: 31.75GiB deviceMemoryBandwidth: 913.62GiB/s
+2022-12-06 00:04:08.591942: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-12-06 00:04:08.597203: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2022-12-06 00:04:08.597257: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2022-12-06 00:04:08.600628: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-12-06 00:04:08.603400: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-12-06 00:04:08.607552: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-12-06 00:04:08.609840: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2022-12-06 00:04:08.616764: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2022-12-06 00:04:08.647270: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+2022-12-06 00:04:08.647664: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-12-06 00:04:08.654056: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-12-06 00:04:10.409797: F tensorflow/stream_executor/lib/statusor.cc:34] Attempting to fetch value instead of handling error Internal: failed initializing StreamExecutor for CUDA device ordinal 9: Internal: failed call to cuDevicePrimaryCtxRetain: CUDA_ERROR_OUT_OF_MEMORY: out of memory; total memory reported: 34089926656
+quiAborted (core dumped)
+(multi_spkr) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1[00m$ quit[K[K[K[Ksh run_nlv.sh telugu male1 
+run_nlv.sh: 18: ./cmd.sh: [[: not found
+============================================================================
+                    Extract Pitch Features                                
+============================================================================
+============================================================================
+                    Extract FBANK Features                                
+============================================================================
+Pitch features file exp_telugu_male1/tts/pitch.ark exits. Skipping Pitch extraction
+============================================================================
+                    Formatting Data for Prosody TTS Training              
+============================================================================
+ali-to-phones --per-frame exp_telugu_male1/mono_ali/final.mdl 'ark:gunzip -c exp_telugu_male1/mono_ali/ali.1.gz|' ark,t:- 
+ERROR (ali-to-phones[5.5.1014~1-6e633]:Input():kaldi-io.cc:756) Error opening input stream exp_telugu_male1/mono_ali/final.mdl
+
+[ Stack-Trace: ]
+/raid/ksrm/software/kaldi/src/lib/libkaldi-base.so(kaldi::MessageLogger::LogMessage() const+0xb42) [0x7fc5b52ae752]
+ali-to-phones(kaldi::MessageLogger::LogAndThrow::operator=(kaldi::MessageLogger const&)+0x21) [0x55f00d061a15]
+/raid/ksrm/software/kaldi/src/lib/libkaldi-util.so(kaldi::Input::Input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool*)+0xbe) [0x7fc5b5778b28]
+ali-to-phones(main+0x462) [0x55f00d05fcdc]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7fc5b4718c87]
+ali-to-phones(_start+0x2a) [0x55f00d05f79a]
+
+kaldi::KaldiFatalError(multi_spkr) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1[00m$ sh run_nlv.sh telugu male1 
+run_nlv.sh: 18: ./cmd.sh: [[: not found
+============================================================================
+                    Extract Pitch Features                                
+============================================================================
+============================================================================
+                    Extract FBANK Features                                
+============================================================================
+Pitch features file exp_telugu_male1/tts/pitch.ark exits. Skipping Pitch extraction
+============================================================================
+                    Formatting Data for Prosody TTS Training              
+============================================================================
+ali-to-phones --per-frame exp_telugu_male1/mono_ali/final.mdl 'ark:gunzip -c exp_telugu_male1/mono_ali/ali.1.gz|' ark,t:- 
+ERROR (ali-to-phones[5.5.1014~1-6e633]:Input():kaldi-io.cc:756) Error opening input stream exp_telugu_male1/mono_ali/final.mdl
+
+[ Stack-Trace: ]
+/raid/ksrm/software/kaldi/src/lib/libkaldi-base.so(kaldi::MessageLogger::LogMessage() const+0xb42) [0x7f6bdc125752]
+ali-to-phones(kaldi::MessageLogger::LogAndThrow::operator=(kaldi::MessageLogger const&)+0x21) [0x55b6e01b4a15]
+/raid/ksrm/software/kaldi/src/lib/libkaldi-util.so(kaldi::Input::Input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool*)+0xbe) [0x7f6bdc5efb28]
+ali-to-phones(main+0x462) [0x55b6e01b2cdc]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f6bdb58fc87]
+ali-to-phones(_start+0x2a) [0x55b6e01b279a]
+
+kaldi::KaldiFatalError(multi_spkr) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1[00m$ sh run_nlv.sh telugu male1 
+run_nlv.sh: 18: ./cmd.sh: [[: not found
+============================================================================
+                    Extract Pitch Features                                
+============================================================================
+============================================================================
+                    Extract FBANK Features                                
+============================================================================
+Extracting Pitch Fbank features
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(1)<module>()
+-> import os
+(Pdb) n   b 81
+Breakpoint 1 at /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py:81
+(Pdb) c
+2022-12-06 00:07:05.912657: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(81)<module>()
+-> fs, wav = wavfile.read(utt_file)
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(82)<module>()
+-> wav = wav/(2**15)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(83)<module>()
+-> wav = kaldi_pad(wav,80)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(84)<module>()
+-> wav_out(utt_id, wav.reshape(-1,80))
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(85)<module>()
+-> wav1 = np.pad(wav, 200)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(86)<module>()
+-> signal = basic_tools.SignalObj(data=wav1, fs=fs)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(89)<module>()
+-> f0, bap = analysis(utt_file, frame_length, frame_step)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(90)<module>()
+-> bap_out(utt_id, np.expand_dims(bap[:len(f0)], axis=-1))
+(Pdb) fo, .shape
+*** NameError: name 'fo' is not defined
+(Pdb) fo.shapeo[1P[1@0
+(2868,)
+(Pdb) l
+ 85  	    wav1 = np.pad(wav, 200)
+ 86  	    signal = basic_tools.SignalObj(data=wav1, fs=fs)
+ 87  	    #pitch=pYAAPT.yaapt(signal, **{'f0_min' : f0_min, 'f0_max': f0_max, 'frame_length': 25, 'frame_space':5})
+ 88  	    #f0 = pitch.samp_values
+ 89  	    f0, bap = analysis(utt_file, frame_length, frame_step)
+ 90  ->	    bap_out(utt_id, np.expand_dims(bap[:len(f0)], axis=-1))
+ 91  	    f0[f0<1]=1
+ 92  	    fout(utt_id, np.expand_dims(f0, axis=-1))
+ 93  	    f0s_all.append(f0)
+ 94  	
+ 95  	    wav = load_wav(utt_file)    #fs, wav = wavfile.read(utt_file)
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(91)<module>()
+-> f0[f0<1]=1
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(92)<module>()
+-> fout(utt_id, np.expand_dims(f0, axis=-1))
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(93)<module>()
+-> f0s_all.append(f0)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(95)<module>()
+-> wav = load_wav(utt_file)    #fs, wav = wavfile.read(utt_file)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(96)<module>()
+-> wav = kaldi_pad(wav,frame_step)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(98)<module>()
+-> specgram = spectrogram(wav)#.astype(np.float32)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(100)<module>()
+-> mag_spec = tf.math.abs(specgram).numpy()
+(Pdb) specgram.shape
+(2868, 513)
+(Pdb) specgram.shape     dtype
+dtype('complex128')
+(Pdb) l
+ 95  	    wav = load_wav(utt_file)    #fs, wav = wavfile.read(utt_file)
+ 96  	    wav = kaldi_pad(wav,frame_step)
+ 97  	
+ 98  	    specgram = spectrogram(wav)#.astype(np.float32)
+ 99  	
+100  ->	    mag_spec = tf.math.abs(specgram).numpy()
+101  	    fbank = melspectrogram(mag_spec).astype(np.float32)
+102  	
+103  	    spec = norm_spec(mag_spec)
+104  	
+105  	    spec_out(utt_id, spec)
+(Pdb) n
+2022-12-06 00:08:10.680355: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-12-06 00:08:10.934935: E tensorflow/stream_executor/cuda/cuda_driver.cc:328] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2022-12-06 00:08:10.935008: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: ubuntu
+2022-12-06 00:08:10.935017: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: ubuntu
+2022-12-06 00:08:10.935476: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 510.47.3
+2022-12-06 00:08:10.935510: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 510.47.3
+2022-12-06 00:08:10.935516: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 510.47.3
+2022-12-06 00:08:10.936209: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-12-06 00:08:10.949546: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2700000000 Hz
+2022-12-06 00:08:10.955457: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55870514e1a0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2022-12-06 00:08:10.955490: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(101)<module>()
+-> fbank = melspectrogram(mag_spec).astype(np.float32)
+(Pdb) mag_spec.shape
+(2868, 513)
+(Pdb) mag_spec.shape     s dtype
+dtype('float64')
+(Pdb) l
+ 96  	    wav = kaldi_pad(wav,frame_step)
+ 97  	
+ 98  	    specgram = spectrogram(wav)#.astype(np.float32)
+ 99  	
+100  	    mag_spec = tf.math.abs(specgram).numpy()
+101  ->	    fbank = melspectrogram(mag_spec).astype(np.float32)
+102  	
+103  	    spec = norm_spec(mag_spec)
+104  	
+105  	    spec_out(utt_id, spec)
+106  	    fbank_out(utt_id, fbank)
+(Pdb) fbank = melspectrogram(mag_spec)
+/raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/utils.py:44: FutureWarning: Pass sr=16000, n_fft=1024 as keyword args. From version 0.10 passing these as positional arguments will result in an error
+  return librosa.filters.mel(16000, n_fft, n_mels=128)
+(Pdb) ll
+  1  	import os
+  2  	os.environ["OMP_NUM_THREADS"] = "1" # export OMP_NUM_THREADS=1
+  3  	os.environ["OPENBLAS_NUM_THREADS"] = "1" # export OPENBLAS_NUM_THREADS=1
+  4  	os.environ["MKL_NUM_THREADS"] = "1" # export MKL_NUM_THREADS=1
+  5  	os.environ["VECLIB_MAXIMUM_THREADS"] = "1" # export VECLIB_MAXIMUM_THREADS=1
+  6  	os.environ["NUMEXPR_NUM_THREADS"] = "1" # export NUMEXPR_NUM_THREADS=1
+  7  	os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
+  8  	os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+  9  	os.environ["CUDA_VISIBLE_DEVICES"] = ""
+ 10  	
+ 11  	import tensorflow as tf
+ 12  	import sys
+ 13  	from scipy.io import wavfile
+ 14  	from amfm_decompy import pYAAPT, basic_tools
+ 15  	import numpy as np
+ 16  	from utils import kaldi_pad, log10
+ 17  	from kaldiio import WriteHelper
+ 18  	from exc_from_f0 import synthesise_excitation
+ 19  	from utils import kaldi_pad, preemphasis, minmax_norm, load_wav, spectrogram, melspectrogram, norm_spec
+ 20  	from kaldiio import WriteHelper
+ 21  	import sys
+ 22  	
+ 23  	def analysis(utt_file, frame_length=400, frame_step=80, fft_length=1024):
+ 24  	    comm = "%s %s %s.f0.double %s.sp.double %s.bap.double > %s.log"%(ana_comm, utt_file, outstem, outstem, outstem, outstem)
+ 25  	    success = os.system(comm)
+ 26  	    comm = "%s +da %s.f0.double > %s.txt"%(x2x_comm, outstem, outstem)
+ 27  	    success = os.system(comm)
+ 28  	    fo = np.loadtxt(outstem+".txt")
+ 29  	    comm = "%s +da tmp.bap.double > tmp.bap"%(x2x_comm)
+ 30  	    success = os.system(comm)
+ 31  	    log_bap = np.loadtxt("tmp.bap")
+ 32  	    bap = np.exp(log_bap)
+ 33  	    return fo, bap
+ 34  	
+ 35  	def generate_exc(fo, bap, wavlen):
+ 36  	    sawtooth = synthesise_excitation(fo, wavlen)
+ 37  	    bap = np.repeat(bap, 80, axis=0)
+ 38  	    bap = bap[:len(sawtooth)]
+ 39  	    new_exct = np.divide(sawtooth/2**15 + np.multiply((np.random.rand(len(sawtooth)))/2, bap) , 1.0+bap)
+ 40  	    return new_exct
+ 41  	
+ 42  	
+ 43  	
+ 44  	lang = sys.argv[1]
+ 45  	gender=sys.argv[2]
+ 46  	ana_comm = os.path.join(os.getcwd(), 'analysis')
+ 47  	x2x_comm = os.path.join(os.getcwd(), 'x2x')
+ 48  	frame_length=400
+ 49  	frame_step=80
+ 50  	outstem = 'tmp'
+ 51  	fft_length=1024
+ 52  	num_mel_bins = 128
+ 53  	min_dB = -100
+ 54  	max_dB = 25
+ 55  	
+ 56  	if gender=='male':
+ 57  	    f0_min = 50.0
+ 58  	    f0_max = 300.0
+ 59  	elif gender=='female':
+ 60  	    f0_min = 90.0
+ 61  	    f0_max = 400.0
+ 62  	else:
+ 63  	    f0_min = 50.0
+ 64  	    f0_max = 400.0
+ 65  	
+ 66  	scpfile='exp_%s_%s/data/train/wav.scp'%(lang,gender)
+ 67  	fout=WriteHelper('ark,scp:exp_%s_%s/tts/pitch.ark,exp_%s_%s/tts/pitch.scp'%(lang,gender,lang,gender))
+ 68  	bap_out=WriteHelper('ark,scp:exp_%s_%s/tts/bap.ark,exp_%s_%s/tts/bap.scp'%(lang,gender,lang,gender))
+ 69  	wav_out=WriteHelper('ark,scp:exp_%s_%s/tts/waveform.ark,exp_%s_%s/tts/waveform.scp'%(lang,gender,lang,gender))
+ 70  	
+ 71  	spec_out=WriteHelper('ark,scp:exp_%s_%s/tts/spgram.ark,exp_%s_%s/tts/spgram.scp'%(lang,gender,lang,gender))
+ 72  	fbank_out=WriteHelper('ark,scp:exp_%s_%s/tts/fbank.ark,exp_%s_%s/tts/fbank.scp'%(lang,gender,lang,gender))
+ 73  	
+ 74  	with open(scpfile) as fp:
+ 75  	    scp=fp.read().splitlines()
+ 76  	
+ 77  	f0s_all=[]
+ 78  	for utt in scp:
+ 79  	    utt_id=utt.split('\t')[0]
+ 80  	    utt_file=utt.split('\t')[1]
+ 81 B	    fs, wav = wavfile.read(utt_file)
+ 82  	    wav = wav/(2**15)
+ 83  	    wav = kaldi_pad(wav,80)
+ 84  	    wav_out(utt_id, wav.reshape(-1,80))
+ 85  	    wav1 = np.pad(wav, 200)
+ 86  	    signal = basic_tools.SignalObj(data=wav1, fs=fs)
+ 87  	    #pitch=pYAAPT.yaapt(signal, **{'f0_min' : f0_min, 'f0_max': f0_max, 'frame_length': 25, 'frame_space':5})
+ 88  	    #f0 = pitch.samp_values
+ 89  	    f0, bap = analysis(utt_file, frame_length, frame_step)
+ 90  	    bap_out(utt_id, np.expand_dims(bap[:len(f0)], axis=-1))
+ 91  	    f0[f0<1]=1
+ 92  	    fout(utt_id, np.expand_dims(f0, axis=-1))
+ 93  	    f0s_all.append(f0)
+ 94  	
+ 95  	    wav = load_wav(utt_file)    #fs, wav = wavfile.read(utt_file)
+ 96  	    wav = kaldi_pad(wav,frame_step)
+ 97  	
+ 98  	    specgram = spectrogram(wav)#.astype(np.float32)
+ 99  	
+100  	    mag_spec = tf.math.abs(specgram).numpy()
+101  ->	    fbank = melspectrogram(mag_spec).astype(np.float32)
+102  	
+103  	    spec = norm_spec(mag_spec)
+104  	
+105  	    spec_out(utt_id, spec)
+106  	    fbank_out(utt_id, fbank)
+107  	fout.close()
+108  	wav_out.close()
+109  	bap_out.close()
+110  	spec_out.close()
+111  	fbank_out.close()
+112  	
+113  	f0s_all=np.hstack(f0s_all)
+114  	unique_f0s=np.unique(f0s_all)
+115  	min_f0=unique_f0s[1]
+116  	max_f0=unique_f0s[-1]
+117  	
+118  	dict={'min_f0':min_f0,'max_f0':max_f0}
+119  	np.save('exp_%s_%s/tts/f0_stats'%(lang,gender),dict)
+120  	
+121  	for fil in ['tmp.bap', 'tmp.bap.double', 'tmp.f0.double', 'tmp.log', 'tmp.sp.double']:
+122  	    os.remove(fil)
+123  	
+(Pdb) llfbank = melspectrogram(mag_spec)(Pdb) l[Kfbank = melspectrogram(mag_spec)(Pdb) l[Kfbank = melspectrogram(mag_spec)(Pdb) ll[Kfbank = melspectrogram(mag_spec)                           , .sd  dtypr e
+dtype('float64')
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(103)<module>()
+-> spec = norm_spec(mag_spec)
+(Pdb) nfbank.dtype
+dtype('float32')
+(Pdb) l
+ 98  	    specgram = spectrogram(wav)#.astype(np.float32)
+ 99  	
+100  	    mag_spec = tf.math.abs(specgram).numpy()
+101  	    fbank = melspectrogram(mag_spec).astype(np.float32)
+102  	
+103  ->	    spec = norm_spec(mag_spec)
+104  	
+105  	    spec_out(utt_id, spec)
+106  	    fbank_out(utt_id, fbank)
+107  	fout.close()
+108  	wav_out.close()
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(105)<module>()
+-> spec_out(utt_id, spec)
+(Pdb) spec, .dtype
+dtype('float64')
+(Pdb) spec.dtype(Pdb) n[Klfbank.dtype     shape
+(2868, 128)
+(Pdb) spec = norm_spec(mag_spec.astype(np.float32))
+(Pdb) spec = norm_spec(mag_spec.astype(np.float32))(Pdb) fbank.shape[K(Pdb) [1Pspec.dtype(Pdb) n[Kspec.dtype
+dtype('float32')
+(Pdb) l
+100  	    mag_spec = tf.math.abs(specgram).numpy()
+101  	    fbank = melspectrogram(mag_spec).astype(np.float32)
+102  	
+103  	    spec = norm_spec(mag_spec)
+104  	
+105  ->	    spec_out(utt_id, spec)
+106  	    fbank_out(utt_id, fbank)
+107  	fout.close()
+108  	wav_out.close()
+109  	bap_out.close()
+110  	spec_out.close()
+(Pdb) n
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(106)<module>()
+-> fbank_out(utt_id, fbank)
+(Pdb) 
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(78)<module>()
+-> for utt in scp:
+(Pdb) l
+ 73  	
+ 74  	with open(scpfile) as fp:
+ 75  	    scp=fp.read().splitlines()
+ 76  	
+ 77  	f0s_all=[]
+ 78  ->	for utt in scp:
+ 79  	    utt_id=utt.split('\t')[0]
+ 80  	    utt_file=utt.split('\t')[1]
+ 81 B	    fs, wav = wavfile.read(utt_file)
+ 82  	    wav = wav/(2**15)
+ 83  	    wav = kaldi_pad(wav,80)
+(Pdb) quit()
+============================================================================
+                    Formatting Data for Prosody TTS Training              
+============================================================================
+ali-to-phones --per-frame exp_telugu_male1/mono_ali/final.mdl 'ark:gunzip -c exp_telugu_male1/mono_ali/ali.1.gz|' ark,t:- 
+ERROR (ali-to-phones[5.5.1014~1-6e633]:Input():kaldi-io.cc:756) Error opening input stream exp_telugu_male1/mono_ali/final.mdl
+
+[ Stack-Trace: ]
+/raid/ksrm/software/kaldi/src/lib/libkaldi-base.so(kaldi::MessageLogger::LogMessage() const+0xb42) [0x7f535e7a0752]
+ali-to-phones(kaldi::MessageLogger::LogAndThrow::operator=(kaldi::MessageLogger const&)+0x21) [0x55c5382d0a15]
+/raid/ksrm/software/kaldi/src/lib/libkaldi-util.so(kaldi::Input::Input(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool*)+0xbe) [0x7f535ec6ab28]
+ali-to-phones(main+0x462) [0x55c5382cecdc]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f535dc0ac87]
+ali-to-phones(_start+0x2a) [0x55c5382ce79a]
+
+kaldi::KaldiFatalError(multi_spkr) [01;32mee17resch11001@ubuntu[00m:[01;34m~/LIMMITS/ProsodyTTS2/Tel_male1[00m$ sh run_nlv.sh telugu male1 
+run_nlv.sh: 18: ./cmd.sh: [[: not found
+============================================================================
+                Data & Lexicon & Language Preparation                     
+============================================================================
+mkdir: cannot create directory 'tmp': File exists
+wav-to-duration --read-entire-file=true scp:exp_telugu_male1/data/train/wav.scp ark,t:exp_telugu_male1/data/train/dur.ark 
+LOG (wav-to-duration[5.5.1014~1-6e633]:main():wav-to-duration.cc:92) Printed duration for 3317 audio files.
+LOG (wav-to-duration[5.5.1014~1-6e633]:main():wav-to-duration.cc:94) Mean duration was 9.08678, min and max durations were 2.69869, 14.8907
+Data preparation succeeded
+LOGFILE:/dev/null
+$bin/ngt -i="$inpfile" -n=$order -gooout=y -o="$gzip -c > $tmpdir/ngram.${sdict}.gz" -fd="$tmpdir/$sdict" $dictionary $additional_parameters >> $logfile 2>&1
+$scr/build-sublm.pl $verbose $prune $prune_thr_str $smoothing "$additional_smoothing_parameters" --size $order --ngrams "$gunzip -c $tmpdir/ngram.${sdict}.gz" -sublm $tmpdir/lm.$sdict $additional_parameters >> $logfile 2>&1
+inpfile: exp_telugu_male1/data/lm_tmp/lm_phone_bg.ilm.gz
+outfile: /dev/stdout
+loading up to the LM level 1000 (if any)
+dub: 10000000
+OOV code is 21924
+OOV code is 21924
+Saving in txt format to /dev/stdout
+Dictionary & language model preparation succeeded
+utils/prepare_lang.sh --sil-prob 0.5 --position-dependent-phones false --num-sil-states 3 exp_telugu_male1/data/dict sil exp_telugu_male1/data/lang_tmp exp_telugu_male1/data/lang
+Checking exp_telugu_male1/data/dict/silence_phones.txt ...
+--> reading exp_telugu_male1/data/dict/silence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/silence_phones.txt is OK
+
+Checking exp_telugu_male1/data/dict/optional_silence.txt ...
+--> reading exp_telugu_male1/data/dict/optional_silence.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/optional_silence.txt is OK
+
+Checking exp_telugu_male1/data/dict/nonsilence_phones.txt ...
+--> reading exp_telugu_male1/data/dict/nonsilence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/nonsilence_phones.txt is OK
+
+Checking disjoint: silence_phones.txt, nonsilence_phones.txt
+--> disjoint property is OK.
+
+Checking exp_telugu_male1/data/dict/lexicon.txt
+--> reading exp_telugu_male1/data/dict/lexicon.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/lexicon.txt is OK
+
+Checking exp_telugu_male1/data/dict/lexiconp.txt
+--> reading exp_telugu_male1/data/dict/lexiconp.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/lexiconp.txt is OK
+
+Checking lexicon pair exp_telugu_male1/data/dict/lexicon.txt and exp_telugu_male1/data/dict/lexiconp.txt
+--> lexicon pair exp_telugu_male1/data/dict/lexicon.txt and exp_telugu_male1/data/dict/lexiconp.txt match
+
+Checking exp_telugu_male1/data/dict/extra_questions.txt ...
+--> reading exp_telugu_male1/data/dict/extra_questions.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/dict/extra_questions.txt is OK
+--> SUCCESS [validating dictionary directory exp_telugu_male1/data/dict]
+
+fstaddselfloops exp_telugu_male1/data/lang/phones/wdisambig_phones.int exp_telugu_male1/data/lang/phones/wdisambig_words.int 
+prepare_lang.sh: validating output directory
+utils/validate_lang.pl exp_telugu_male1/data/lang
+Checking existence of separator file
+separator file exp_telugu_male1/data/lang/subword_separator.txt is empty or does not exist, deal in word case.
+Checking exp_telugu_male1/data/lang/phones.txt ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/lang/phones.txt is OK
+
+Checking words.txt: #0 ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/lang/words.txt is OK
+
+Checking disjoint: silence.txt, nonsilence.txt, disambig.txt ...
+--> silence.txt and nonsilence.txt are disjoint
+--> silence.txt and disambig.txt are disjoint
+--> disambig.txt and nonsilence.txt are disjoint
+--> disjoint property is OK
+
+Checking sumation: silence.txt, nonsilence.txt, disambig.txt ...
+--> found no unexplainable phones in phones.txt
+
+Checking exp_telugu_male1/data/lang/phones/context_indep.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang/phones/context_indep.txt
+--> exp_telugu_male1/data/lang/phones/context_indep.int corresponds to exp_telugu_male1/data/lang/phones/context_indep.txt
+--> exp_telugu_male1/data/lang/phones/context_indep.csl corresponds to exp_telugu_male1/data/lang/phones/context_indep.txt
+--> exp_telugu_male1/data/lang/phones/context_indep.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/nonsilence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 72 entry/entries in exp_telugu_male1/data/lang/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang/phones/nonsilence.int corresponds to exp_telugu_male1/data/lang/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang/phones/nonsilence.csl corresponds to exp_telugu_male1/data/lang/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang/phones/nonsilence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang/phones/silence.txt
+--> exp_telugu_male1/data/lang/phones/silence.int corresponds to exp_telugu_male1/data/lang/phones/silence.txt
+--> exp_telugu_male1/data/lang/phones/silence.csl corresponds to exp_telugu_male1/data/lang/phones/silence.txt
+--> exp_telugu_male1/data/lang/phones/silence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/optional_silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang/phones/optional_silence.int corresponds to exp_telugu_male1/data/lang/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang/phones/optional_silence.csl corresponds to exp_telugu_male1/data/lang/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang/phones/optional_silence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/disambig.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 4 entry/entries in exp_telugu_male1/data/lang/phones/disambig.txt
+--> exp_telugu_male1/data/lang/phones/disambig.int corresponds to exp_telugu_male1/data/lang/phones/disambig.txt
+--> exp_telugu_male1/data/lang/phones/disambig.csl corresponds to exp_telugu_male1/data/lang/phones/disambig.txt
+--> exp_telugu_male1/data/lang/phones/disambig.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang/phones/roots.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 73 entry/entries in exp_telugu_male1/data/lang/phones/roots.txt
+--> exp_telugu_male1/data/lang/phones/roots.int corresponds to exp_telugu_male1/data/lang/phones/roots.txt
+--> exp_telugu_male1/data/lang/phones/roots.{txt, int} are OK
+
+Checking exp_telugu_male1/data/lang/phones/sets.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 73 entry/entries in exp_telugu_male1/data/lang/phones/sets.txt
+--> exp_telugu_male1/data/lang/phones/sets.int corresponds to exp_telugu_male1/data/lang/phones/sets.txt
+--> exp_telugu_male1/data/lang/phones/sets.{txt, int} are OK
+
+Checking exp_telugu_male1/data/lang/phones/extra_questions.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 2 entry/entries in exp_telugu_male1/data/lang/phones/extra_questions.txt
+--> exp_telugu_male1/data/lang/phones/extra_questions.int corresponds to exp_telugu_male1/data/lang/phones/extra_questions.txt
+--> exp_telugu_male1/data/lang/phones/extra_questions.{txt, int} are OK
+
+Checking optional_silence.txt ...
+--> reading exp_telugu_male1/data/lang/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang/phones/optional_silence.txt is OK
+
+Checking disambiguation symbols: #0 and #1
+--> exp_telugu_male1/data/lang/phones/disambig.txt has "#0" and "#1"
+--> exp_telugu_male1/data/lang/phones/disambig.txt is OK
+
+Checking topo ...
+
+Checking word-level disambiguation symbols...
+--> exp_telugu_male1/data/lang/phones/wdisambig.txt exists (newer prepare_lang.sh)
+Checking exp_telugu_male1/data/lang/oov.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang/oov.txt
+--> exp_telugu_male1/data/lang/oov.int corresponds to exp_telugu_male1/data/lang/oov.txt
+--> exp_telugu_male1/data/lang/oov.{txt, int} are OK
+
+--> exp_telugu_male1/data/lang/L.fst is olabel sorted
+--> exp_telugu_male1/data/lang/L_disambig.fst is olabel sorted
+--> SUCCESS [validating lang directory exp_telugu_male1/data/lang]
+Preparing train, dev and test data
+Preparing language models for test
+arpa2fst --disambig-symbol=#0 --read-symbol-table=exp_telugu_male1/data/lang_test_bg/words.txt - exp_telugu_male1/data/lang_test_bg/G.fst 
+LOG (arpa2fst[5.5.1014~1-6e633]:Read():arpa-file-parser.cc:94) Reading \data\ section.
+LOG (arpa2fst[5.5.1014~1-6e633]:Read():arpa-file-parser.cc:149) Reading \1-grams: section.
+LOG (arpa2fst[5.5.1014~1-6e633]:Read():arpa-file-parser.cc:149) Reading \2-grams: section.
+WARNING (arpa2fst[5.5.1014~1-6e633]:ConsumeNGram():arpa-lm-compiler.cc:313) line 21934 [-3.22023	<s> <s>] skipped: n-gram has invalid BOS/EOS placement
+LOG (arpa2fst[5.5.1014~1-6e633]:RemoveRedundantStates():arpa-lm-compiler.cc:359) Reduced num-states from 21924 to 21924
+fstisstochastic exp_telugu_male1/data/lang_test_bg/G.fst 
+0.23525 -0.0544431
+utils/validate_lang.pl exp_telugu_male1/data/lang_test_bg
+Checking existence of separator file
+separator file exp_telugu_male1/data/lang_test_bg/subword_separator.txt is empty or does not exist, deal in word case.
+Checking exp_telugu_male1/data/lang_test_bg/phones.txt ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/lang_test_bg/phones.txt is OK
+
+Checking words.txt: #0 ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> exp_telugu_male1/data/lang_test_bg/words.txt is OK
+
+Checking disjoint: silence.txt, nonsilence.txt, disambig.txt ...
+--> silence.txt and nonsilence.txt are disjoint
+--> silence.txt and disambig.txt are disjoint
+--> disambig.txt and nonsilence.txt are disjoint
+--> disjoint property is OK
+
+Checking sumation: silence.txt, nonsilence.txt, disambig.txt ...
+--> found no unexplainable phones in phones.txt
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/context_indep.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/context_indep.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/context_indep.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/context_indep.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/context_indep.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/context_indep.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/context_indep.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/nonsilence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 72 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/nonsilence.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/nonsilence.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/nonsilence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/nonsilence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/silence.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/silence.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/silence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/optional_silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/optional_silence.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/optional_silence.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/optional_silence.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/disambig.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 4 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/disambig.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/disambig.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.csl corresponds to exp_telugu_male1/data/lang_test_bg/phones/disambig.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.{txt, int, csl} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/roots.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 73 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/roots.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/roots.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/roots.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/roots.{txt, int} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/sets.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 73 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/sets.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/sets.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/sets.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/sets.{txt, int} are OK
+
+Checking exp_telugu_male1/data/lang_test_bg/phones/extra_questions.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 2 entry/entries in exp_telugu_male1/data/lang_test_bg/phones/extra_questions.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/extra_questions.int corresponds to exp_telugu_male1/data/lang_test_bg/phones/extra_questions.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/extra_questions.{txt, int} are OK
+
+Checking optional_silence.txt ...
+--> reading exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt
+--> exp_telugu_male1/data/lang_test_bg/phones/optional_silence.txt is OK
+
+Checking disambiguation symbols: #0 and #1
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.txt has "#0" and "#1"
+--> exp_telugu_male1/data/lang_test_bg/phones/disambig.txt is OK
+
+Checking topo ...
+
+Checking word-level disambiguation symbols...
+--> exp_telugu_male1/data/lang_test_bg/phones/wdisambig.txt exists (newer prepare_lang.sh)
+Checking exp_telugu_male1/data/lang_test_bg/oov.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in exp_telugu_male1/data/lang_test_bg/oov.txt
+--> exp_telugu_male1/data/lang_test_bg/oov.int corresponds to exp_telugu_male1/data/lang_test_bg/oov.txt
+--> exp_telugu_male1/data/lang_test_bg/oov.{txt, int} are OK
+
+--> exp_telugu_male1/data/lang_test_bg/L.fst is olabel sorted
+--> exp_telugu_male1/data/lang_test_bg/L_disambig.fst is olabel sorted
+--> exp_telugu_male1/data/lang_test_bg/G.fst is ilabel sorted
+--> exp_telugu_male1/data/lang_test_bg/G.fst has 21924 states
+fstdeterminizestar exp_telugu_male1/data/lang_test_bg/G.fst /dev/null 
+--> exp_telugu_male1/data/lang_test_bg/G.fst is determinizable
+--> utils/lang/check_g_properties.pl successfully validated exp_telugu_male1/data/lang_test_bg/G.fst
+--> utils/lang/check_g_properties.pl succeeded.
+--> Testing determinizability of L_disambig . G
+fsttablecompose exp_telugu_male1/data/lang_test_bg/L_disambig.fst exp_telugu_male1/data/lang_test_bg/G.fst 
+fstdeterminizestar 
+--> L_disambig . G is determinizable
+--> SUCCESS [validating lang directory exp_telugu_male1/data/lang_test_bg]
+Succeeded in formatting data.
+============================================================================
+         MFCC Feature Extration & CMVN for Training and Test set          
+============================================================================
+steps/make_mfcc.sh --cmd run.pl --mem 4G --nj 1 exp_telugu_male1/data/train exp_telugu_male1/make_mfcc/train exp_telugu_male1/mfcc
+utils/validate_data_dir.sh: WARNING: you have only one speaker.  This probably a bad idea.
+   Search for the word 'bold' in http://kaldi-asr.org/doc/data_prep.html
+   for more information.
+utils/validate_data_dir.sh: Successfully validated data-directory exp_telugu_male1/data/train
+steps/make_mfcc.sh: [info]: no segments file exists: assuming wav.scp indexed by utterance.
+steps/make_mfcc.sh: Succeeded creating MFCC features for train
+steps/compute_cmvn_stats.sh exp_telugu_male1/data/train exp_telugu_male1/make_mfcc/train exp_telugu_male1/mfcc
+Succeeded creating CMVN stats for train
+============================================================================
+                     MonoPhone Training &  Alignment                     
+============================================================================
+steps/train_mono.sh --boost-silence 1.0 --careful true --totgauss 1000 --nj 1 --cmd run.pl --mem 4G exp_telugu_male1/data/train exp_telugu_male1/data/lang exp_telugu_male1/mono
+steps/train_mono.sh: Initializing monophone system.
+steps/train_mono.sh: Compiling training graphs
+steps/train_mono.sh: Aligning data equally (pass 0)
+steps/train_mono.sh: Pass 1
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 2
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 3
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 4
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 5
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 6
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 7
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 8
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 9
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 10
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 11
+steps/train_mono.sh: Pass 12
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 13
+steps/train_mono.sh: Pass 14
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 15
+steps/train_mono.sh: Pass 16
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 17
+steps/train_mono.sh: Pass 18
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 19
+steps/train_mono.sh: Pass 20
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 21
+steps/train_mono.sh: Pass 22
+steps/train_mono.sh: Pass 23
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 24
+steps/train_mono.sh: Pass 25
+steps/train_mono.sh: Pass 26
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 27
+steps/train_mono.sh: Pass 28
+steps/train_mono.sh: Pass 29
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 30
+steps/train_mono.sh: Pass 31
+steps/train_mono.sh: Pass 32
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 33
+steps/train_mono.sh: Pass 34
+steps/train_mono.sh: Pass 35
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 36
+steps/train_mono.sh: Pass 37
+steps/train_mono.sh: Pass 38
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 39
+steps/diagnostic/analyze_alignments.sh --cmd run.pl --mem 4G exp_telugu_male1/data/lang exp_telugu_male1/mono
+steps/diagnostic/analyze_alignments.sh: see stats in exp_telugu_male1/mono/log/analyze_alignments.log
+580 warnings in exp_telugu_male1/mono/log/update.*.log
+449 warnings in exp_telugu_male1/mono/log/acc.*.*.log
+1654 warnings in exp_telugu_male1/mono/log/align.*.*.log
+exp_telugu_male1/mono: nj=1 align prob=-91.54 over 16.66h [retry=1.2%, fail=0.4%] states=219 gauss=1002
+steps/train_mono.sh: Done training monophone system in exp_telugu_male1/mono
+steps/align_si.sh --boost-silence 1.25 --nj 1 --cmd run.pl --mem 4G exp_telugu_male1/data/train exp_telugu_male1/data/lang exp_telugu_male1/mono exp_telugu_male1/mono_ali
+steps/align_si.sh: feature type is delta
+steps/align_si.sh: aligning data in exp_telugu_male1/data/train using model from exp_telugu_male1/mono, putting alignments in exp_telugu_male1/mono_ali
+steps/diagnostic/analyze_alignments.sh --cmd run.pl --mem 4G exp_telugu_male1/data/lang exp_telugu_male1/mono_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp_telugu_male1/mono_ali/log/analyze_alignments.log
+steps/align_si.sh: done aligning data.
+============================================================================
+           tri1 : Deltas + Delta-Deltas Training & Alignment               
+============================================================================
+steps/train_deltas.sh --boost-silence 1.0 --cmd run.pl --mem 4G 2500 15000 exp_telugu_male1/data/train exp_telugu_male1/data/lang exp_telugu_male1/mono_ali exp_telugu_male1/tri1
+steps/train_deltas.sh: accumulating tree stats
+steps/train_deltas.sh: getting questions for tree-building, via clustering
+steps/train_deltas.sh: building the tree
+steps/train_deltas.sh: converting alignments from exp_telugu_male1/mono_ali to use current tree
+steps/train_deltas.sh: compiling graphs of transcripts
+steps/train_deltas.sh: training pass 1
+steps/train_deltas.sh: training pass 2
+steps/train_deltas.sh: training pass 3
+steps/train_deltas.sh: training pass 4
+steps/train_deltas.sh: training pass 5
+steps/train_deltas.sh: training pass 6
+steps/train_deltas.sh: training pass 7
+steps/train_deltas.sh: training pass 8
+steps/train_deltas.sh: training pass 9
+steps/train_deltas.sh: training pass 10
+steps/train_deltas.sh: aligning data
+steps/train_deltas.sh: training pass 11
+steps/train_deltas.sh: training pass 12
+steps/train_deltas.sh: training pass 13
+steps/train_deltas.sh: training pass 14
+steps/train_deltas.sh: training pass 15
+steps/train_deltas.sh: training pass 16
+steps/train_deltas.sh: training pass 17
+steps/train_deltas.sh: training pass 18
+steps/train_deltas.sh: training pass 19
+steps/train_deltas.sh: training pass 20
+steps/train_deltas.sh: aligning data
+steps/train_deltas.sh: training pass 21
+steps/train_deltas.sh: training pass 22
+steps/train_deltas.sh: training pass 23
+steps/train_deltas.sh: training pass 24
+steps/train_deltas.sh: training pass 25
+steps/train_deltas.sh: training pass 26
+steps/train_deltas.sh: training pass 27
+steps/train_deltas.sh: training pass 28
+steps/train_deltas.sh: training pass 29
+steps/train_deltas.sh: training pass 30
+steps/train_deltas.sh: aligning data
+steps/train_deltas.sh: training pass 31
+steps/train_deltas.sh: training pass 32
+steps/train_deltas.sh: training pass 33
+steps/train_deltas.sh: training pass 34
+steps/diagnostic/analyze_alignments.sh --cmd run.pl --mem 4G exp_telugu_male1/data/lang exp_telugu_male1/tri1
+steps/diagnostic/analyze_alignments.sh: see stats in exp_telugu_male1/tri1/log/analyze_alignments.log
+109 warnings in exp_telugu_male1/tri1/log/update.*.log
+10 warnings in exp_telugu_male1/tri1/log/align.*.*.log
+1 warnings in exp_telugu_male1/tri1/log/compile_questions.log
+25 warnings in exp_telugu_male1/tri1/log/acc.*.*.log
+8 warnings in exp_telugu_male1/tri1/log/init_model.log
+exp_telugu_male1/tri1: nj=1 align prob=-87.42 over 16.74h [retry=0.1%, fail=0.0%] states=2008 gauss=15045 tree-impr=6.78
+steps/train_deltas.sh: Done training system with delta+delta-delta features in exp_telugu_male1/tri1
+steps/align_si.sh --boost-silence 1.25 --nj 1 --cmd run.pl --mem 4G exp_telugu_male1/data/train exp_telugu_male1/data/lang exp_telugu_male1/tri1 exp_telugu_male1/tri1_ali
+steps/align_si.sh: feature type is delta
+steps/align_si.sh: aligning data in exp_telugu_male1/data/train using model from exp_telugu_male1/tri1, putting alignments in exp_telugu_male1/tri1_ali
+steps/diagnostic/analyze_alignments.sh --cmd run.pl --mem 4G exp_telugu_male1/data/lang exp_telugu_male1/tri1_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp_telugu_male1/tri1_ali/log/analyze_alignments.log
+steps/align_si.sh: done aligning data.
+============================================================================
+                    Extract Pitch Features                                
+============================================================================
+============================================================================
+                    Extract FBANK Features                                
+============================================================================
+Extracting Pitch Fbank features
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(1)<module>()
+-> import os
+(Pdb) [K(Pdb) [K(Pdb) l\  cc
+*** NameError: name 'cc' is not defined
+(Pdb) c
+2022-12-06 04:06:02.005365: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2022-12-06 04:06:04.947118: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-12-06 04:06:05.093976: E tensorflow/stream_executor/cuda/cuda_driver.cc:328] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2022-12-06 04:06:05.094045: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: ubuntu
+2022-12-06 04:06:05.094054: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: ubuntu
+2022-12-06 04:06:05.094234: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 510.47.3
+2022-12-06 04:06:05.094271: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 510.47.3
+2022-12-06 04:06:05.094279: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 510.47.3
+2022-12-06 04:06:05.094781: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-12-06 04:06:05.106523: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2700000000 Hz
+2022-12-06 04:06:05.111907: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x557356021be0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2022-12-06 04:06:05.111932: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+The program finished and will be restarted
+> /raid/ee17resch11001/LIMMITS/ProsodyTTS2/Tel_male1/compute-feats.py(1)<module>()
+-> import os
+(Pdb) [K(Pdb) [K(Pdb) [K(Pdb) 
